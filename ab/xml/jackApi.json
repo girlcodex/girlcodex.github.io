@@ -1,0 +1,29 @@
+{
+"showName" : [{"show":"The Flash","network":"The CW","country":"USA"}],
+
+
+
+ "name"         : "Dr. Henry Allen",
+ "gender"       : "Male",
+ "age"          : [{"age":"61", "annum":"years"}],
+
+ "title"        : [{"title":"Medical Doctor", "type":"Medic"}],
+
+ "alias"        : [{"name":""}],
+
+ "first"        : "S1E1 (Pilot)",
+ "total"        : {"number":"18", "type":"Episodes"},
+ "status"       : [{"1":"living", "2":"Deceased", "3":"other"}],
+ "death"        : "is living",
+ "isAlive"      : "1",
+ "origin"       : [{"city":"", "state":"", "county":"", "country":"", "planet":"", "other":"Central City, USA (Earth-1)"}],
+ "allegiance"   : [{"name":"The Allen Family"},{"role":"Father of Barry Allen"},
+	                 {"name":"Team Flash"},{"role":"Patriarch"},
+ 	                 {"name":"The West Family", "role":"Friend"}],
+
+ "culture"      : [{"name":"Hero", "alignment":"Good"}],
+ "power"        : [{"name":"", "type":"", "special":"", "extra":"" }],
+ "family"       : [{"name":"Nora Allen", "relation":"Wife"},{"name":"Barry Allen","relation":"Son"}],
+ "player"       : [{"name":"John Wesley Shipp","modifier":""},{"human":"","modifier":""}],
+ "activated"    :   "1"
+}

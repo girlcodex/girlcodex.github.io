@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<widget xmlns = "http://www.w3.org/ns/widgets" 
+		xmlns:gap = "http://phonegap.com/ns/1.0"
+		xmlns:android = "http://schemas.android.com/apk/res/android"
+		id        = "com.rpwalsh.magdala"
+		versionCode="10"
+		version   = "2.0.0">
+		<name>Messages From The Great Mother		</name>
+		<description>Message from the Great Mother, is an application that you will receive every day a message from the Great Mother, encountering the perfect synchronicity in your life.. a message to meditate, showing  the path of the Emerging Feminine revealing the path of the Golden Era, a balance world.		</description>
+		<author href="http://rpwalsh.com" email="castlehalegroup@gmail.com">Castlehale Group		</author>
+    <access origin='*'/>
+    <allow-intent href='http://*/*'/>
+    <allow-intent href='https://*/*'/>
+    <allow-intent href='tel:*'/>
+    <allow-intent href='sms:*'/>
+    <allow-intent href='mailto:*'/>
+    <allow-intent href='geo:*'/>
+    <allow-intent href='itms:*'/>
+    <allow-intent href='itms-apps:*'/>
+    <preference name='AllowInlineMediaPlayback' value='false'/>
+    <preference name='BackupWebStorage' value='cloud'/>
+    <preference name='DisallowOverscroll' value='false'/>
+    <preference name='EnableViewportScale' value='false'/>
+    <preference name='KeyboardDisplayRequiresUserAction' value='true'/>
+    <preference name='MediaPlaybackRequiresUserAction' value='false'/>
+    <preference name='SuppressesIncrementalRendering' value='false'/>
+    <preference name='SuppressesLongPressGesture' value='false'/>
+    <preference name='Suppresses3DTouchGesture' value='false'/>
+    <preference name='GapBetweenPages' value='0'/>
+    <preference name='PageLength' value='0'/>
+    <preference name='PaginationBreakingMode' value='page'/>
+    <preference name='PaginationMode' value='unpaginated'/>
+    <feature name='LocalStorage'>
+        <param name='ios-package' value='CDVLocalStorage'/>
+    </feature>
+    <feature name='HandleOpenUrl'>
+        <param name='ios-package' value='CDVHandleOpenURL'/>
+        <param name='onload' value='true'/>
+    </feature>
+    <feature name='IntentAndNavigationFilter'>
+        <param name='ios-package' value='CDVIntentAndNavigationFilter'/>
+        <param name='onload' value='true'/>
+    </feature>
+    <feature name='GestureHandler'>
+        <param name='ios-package' value='CDVGestureHandler'/>
+        <param name='onload' value='true'/>
+    </feature>
+    <feature name='NetworkStatus'>
+        <param name='ios-package' value='CDVConnection'/>
+    </feature>
+    <access origin='build.phonegap.com'/>
+    <access origin='s3.amazonaws.com'/>
+    <feature name='AppLoader'>
+        <param name='ios-package' value='AppLoader'/>
+    </feature>
+    <content src='index.html'/>
+</widget>

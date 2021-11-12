@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<html lang="en">
+
+<head>
+    <title>: [ O ] :</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+    <style type="text/css">
+        body {
+            background-color: rgba(0, 0, 55, .5);
+            background-size: 3px, 13px, 17px, 5px;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            font-weight: bold;
+            color: white;
+
+            vertical-align: middle;
+            font-family: "Playfair Display", georgia, serif;
+        }
+
+        a,
+        a:visited,
+        a:active,
+        a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        p {
+            display: inline;
+        }
+
+        .card {
+
+            color: rgba(255, 255, 255, 1);
+
+            background-color: rgba(0, 0, 100, 0.5);
+            pointer-events: none;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            padding: 30px;
+            border-radius: 25px;
+            border: 5px #000;
+            width: 450px;
+            height: 225px;
+            margin: auto;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        .card:after {
+            content: " ";
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            border-radius: 50%;
+            left: 0;
+            bottom: -50px;
+            box-shadow: 0 30px 20px rgba(0, 0, 0, 0.6);
+        }
+        .card .card-content {
+            margin: auto;
+            text-align: center;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        .card h1 {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+        }
+        .card h2 {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+        }
+        .card p {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            display: block;
+        }
+        .card p.related {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            font-style: italic;
+        }
+        .card a {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            color: #69c6b8;
+            pointer-events: auto;
+            padding: 10px 15px;
+            background: #4479BA;
+
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #20538D;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -webkit-transition-duration: 0.2s;
+            -moz-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+        }
+        .card a:hover {
+            background: #356094;
+            border: solid 1px #2A4E77;
+            text-decoration: none;
+        }
+        .card a:active {
+            -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            background: #2E5481;
+            border: solid 1px #203E5F;
+        }
+        .card2 a {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            color: #69c6b8;
+            pointer-events: auto;
+            padding: 10px 15px;
+            background: #4479BA;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #20538D;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -webkit-transition-duration: 0.2s;
+            -moz-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+        }
+        .card2 a:hover {
+            background: #356094;
+            border: solid 1px #2A4E77;
+            text-decoration: none;
+        }
+        .card2 a:active {
+            -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            background: #2E5481;
+            border: solid 1px #203E5F;
+        }
+        .footer a {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            color: #fff;
+            pointer-events: auto;
+            padding: 10px 15px;
+            background: #4479BA;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #20538D;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -webkit-transition-duration: 0.2s;
+            -moz-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+        }
+        .footer a:hover {
+            background: #356094;
+            border: solid 1px #2A4E77;
+            text-decoration: none;
+        }
+        .footer a:active {
+            -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            background: #2E5481;
+            border: solid 1px #203E5F;
+        }
+
+
+        .blur {
+            padding-bottom:10px;
+
+            color: rgba(0, 0, 100, 0.5);
+            font-size: 5em;
+            text-align: center;
+
+        }
+        .container2 {
+            text-align:center;
+            background-color: rgba(255, 255, 255, 0);
+            pointer-events: none;
+            -webkit-transform: translateZ(30px);
+            transform: translateZ(30px);
+            border-radius: 25px 0px 0px 25px;
+            padding-left:10px;
+            padding-bottom:20px;
+
+            width: 1000px;
+            height: 100px;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            position: absolute;
+            top:10%;
+
+        }
+
+        .footer {
+            position: absolute;
+            display: none;
+            right: 0;
+            top: 0;
+            left: 0;
+            padding: 0px;
+            width: 100%;
+            background-color: #efefef;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!--rpwalsh entry portal-->
+
+    <!--   top bar + 3D blur   --
+
+       <div class="container">
+       <div  class="blur" >rpwalsh.tk</div>
+       </div>
+    --                         -->
+
+<div id="container" class="container2">
+    <div class="card">
+        <div class=" card-content">
+            <h1>MetaMedia</h1><h2>UI / UX Architects</h2>
+            <p><small>Production Code & Commercial Design</small></p>
+            <br />
+            <p class="related">| <a href="./ab/">3D</a> | <a href="./mm/">VR</a> | <a href="./ph/">2D</a> | <a href="https://play.google.com/store/apps/developer?id=Castlehale+Group+Ltd" target="_blank">App</a> | <a href="./port">Design</a> |</p>
+        </div>
+    </div></div>
+    <!--that's all folks-->
+    <script>
+        var card = $(".card");
+        var container = $(".container");
+        $(document).on("mousemove",function(e) {
+            var ax = -($(window).innerWidth()/2- e.pageX)/20;
+            var ay = ($(window).innerHeight()/2- e.pageY)/10;
+            card.attr("style", "transform: rotateY("+ax+"deg) rotateX("+ay+"deg);-webkit-transform: rotateY("+ax+"deg) rotateX("+ay+"deg);-moz-transform: rotateY("+ax+"deg) rotateX("+ay+"deg)");
+            container.attr("style", "transform: rotateY("+ax+"deg) rotateX("+ay+"deg);-webkit-transform: rotateY("+ax+"deg) rotateX("+ay+"deg);-moz-transform: rotateY("+ax+"deg) rotateX("+ay+"deg)");
+        });
+    </script>
+
+    <!--
+    <div id="quote1">
+        <div id="quote"> <i class="fa fa-quote-left">&nbsp&nbsp</i><span id='text'><p>test this is a test to see what happens with a lot of text</p></span> </div>
+        <div id="author"> Author author </div>
+
+        <div id="right-buttons-hover" class="highlight"> New Quote </div>
+        <div id="right-buttons" class="standard"> New Quote </div>
+
+    </div>
+    -->
+    <!--  only scripts below this line!!    -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="three.js"></script>
+
+    <script src="Detector.js"></script>
+    <script src="DeviceOrientationControls.js"></script>
+    <script src="VRControls.js"></script>
+
+    <script src="OrbitControls.js"></script>
+    <script src="Mirror.js"></script>
+    <script src="WaterShader.js"></script>
+<!--
+    <script>
+        /*This isn't the final, this is just a fork with a few bugs */
+
+        $(document).ready(function() {
+            var $hue = Math.floor((Math.random() * 360) + 1);
+
+            $("#right-buttons-hover").hide()
+
+            /*this will hold quote dictionaries*/
+
+            var quoteBank = [];
+            $.getJSON("https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=30&callback=", function(data) {
+
+                data.forEach(function(val) {
+                    quoteBank.push(val);
+                })
+                changeQuote();
+            });
+
+            /*changes the theme of the website */
+            function changeColor() {
+                $hue = Math.floor((Math.random() * 360) + 1);
+                $("body, .standard").animate({
+                    "background-color": "hsl(" + $hue + ", 68%, 67%)",
+                    queue: false
+                }, 1500);
+                $(".standard-text").animate({
+                    "color": "hsl(" + $hue + ", 68%, 67%)",
+                    queue: false
+                }, 1500);
+                /* This didn't work the way I wanted it to but I like how it checks for hover and wanted to keep the code for reference
+
+                if ($('#right-buttons:hover').length != 0) {
+                  $('#right-buttons').animate({"background-color":  "hsl("+$hue+", 68%, 55%)"}, 1500);*/
+                $(".highlight").animate({
+                    "background-color": "hsl(" + $hue + ", 68%, 55%)",
+                    queue: false
+                }, 1500);
+            }
+
+            function changeQuote() {
+                var randomQuote = Math.floor((Math.random() * 29))
+                $("#text").html(quoteBank[randomQuote].content);
+                $("#author").html(quoteBank[randomQuote].title);
+            }
+
+
+            $("#left-buttons").hover(function() {
+                $(this).css({
+                    "background-color": "hsl(" + $hue + ", 68%, 55%)"
+                })
+            }, function() {
+                $(this).css({
+                    "background-color": "hsl(" + $hue + ", 68%, 67%)"
+                })
+            });
+
+            changeColor();
+            console.log(quoteBank.length)
+                /*this changeQuote() call breaks all jQuery below it and does not execture if placed at the very bottom of the jQuery inside of the document ready function*/
+                /*
+                changeQuote(); */
+
+            //I'm making this a little messy because the changeColor function was not working well with a simple .css change for #right-buttons.  The highlighted or standard color would "freeze" during the animation and I would need to move the mouse back over the button to corret the coloration.  I want the highlight color to be darker, so I could not simply change the opacity.
+            $("#right-buttons, #right-buttons-hover").hover(
+                function() {
+                    $("#right-buttons").hide()
+                    $("#right-buttons-hover").show()
+                },
+                function() {
+                    $("#right-buttons").show()
+                    $("#right-buttons-hover").hide()
+                });
+
+            $("#right-buttons-hover").on('click', function() {
+                changeQuote();
+                changeColor();
+
+            });
+
+        });
+    </script>
+-->
+
+    <script>
+        if (!Detector.webgl) {
+            Detector.addGetWebGLMessage();
+            document.getElementById('container').innerHTML = "";
+        }
+        var container, stats;
+        var camera, scene, renderer;
+        var sphere;
+        var parameters = {
+            width: 2000,
+            height: 2000,
+            widthSegments: 250,
+            heightSegments: 250,
+            depth: 1500,
+            param: 4,
+            filterparam: 1
+        };
+        var waterNormals;
+
+        init();
+        animate();
+
+        function init() {
+            container = document.createElement('div');
+            document.body.appendChild(container);
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.5, 3000000);
+            camera.position.set(2000, 750, 2000);
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls1 = new THREE.DeviceOrientationControls(camera, renderer.domElement);
+            controls2 = new THREE.VRControls(camera, renderer.domElement);
+
+            controls.enablePan = false;
+            controls.minDistance = 1000.0;
+            controls.maxDistance = 5000.0;
+            controls.maxPolarAngle = Math.PI * 0.495;
+            controls.target.set(0, 500, 0);
+            scene.add(new THREE.AmbientLight(0x444444));
+            var light = new THREE.DirectionalLight(0xffffbb, 1);
+            light.position.set(-1, 1, -1);
+            scene.add(light);
+            waterNormals = new THREE.TextureLoader().load('waternormals.jpg');
+            waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
+            water = new THREE.Water(renderer, camera, scene, {
+                textureWidth: 512,
+                textureHeight: 512,
+                waterNormals: waterNormals,
+                alpha: 1.0,
+                sunDirection: light.position.clone().normalize(),
+                sunColor: 0xffffff,
+                waterColor: 0x001e0f,
+                distortionScale: 50.0,
+            });
+            mirrorMesh = new THREE.Mesh(
+                new THREE.PlaneBufferGeometry(parameters.width * 500, parameters.height * 500),
+                water.material
+            );
+            mirrorMesh.add(water);
+            mirrorMesh.rotation.x = -Math.PI * 0.5;
+            scene.add(mirrorMesh);
+            // load skybox
+            var cubeMap = new THREE.CubeTexture([]);
+            cubeMap.format = THREE.RGBFormat;
+            var loader = new THREE.ImageLoader();
+            loader.load('3.png', function(image) {
+                var getSide = function(x, y) {
+                    var size = 1024;
+                    var canvas = document.createElement('canvas');
+                    canvas.width = size;
+                    canvas.height = size;
+                    var context = canvas.getContext('2d');
+                    context.drawImage(image, -x * size, -y * size);
+
+                    function resizeCanvas() {
+                        $(document).width = window.innerWidth;
+                        $(document).height = window.innerHeight;
+                    }
+                    window.addEventListener('resize', resizeCanvas, false);
+                    window.addEventListener('resize', onWindowResize, false);
+
+                    function onWindowResize() {
+
+                        camera.aspect = window.innerWidth / window.innerHeight;
+                        camera.updateProjectionMatrix();
+
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+                    }
+                    return canvas;
+                };
+                cubeMap.images[0] = getSide(2, 1); // px
+                cubeMap.images[1] = getSide(0, 1); // nx
+                cubeMap.images[2] = getSide(1, 0); // py
+                cubeMap.images[3] = getSide(1, 2); // ny
+                cubeMap.images[4] = getSide(1, 1); // pz
+                cubeMap.images[5] = getSide(3, 1); // nz
+                cubeMap.needsUpdate = true;
+            });
+            var cubeShader = THREE.ShaderLib['cube'];
+            cubeShader.uniforms['tCube'].value = cubeMap;
+            var skyBoxMaterial = new THREE.ShaderMaterial({
+                fragmentShader: cubeShader.fragmentShader,
+                vertexShader: cubeShader.vertexShader,
+                uniforms: cubeShader.uniforms,
+                depthWrite: false,
+                side: THREE.BackSide
+            });
+            var skyBox = new THREE.Mesh(
+                new THREE.BoxGeometry(1000000, 1000000, 1000000),
+                skyBoxMaterial
+            );
+            scene.add(skyBox);
+            var geometry = new THREE.IcosahedronGeometry(400, 4);
+            for (var i = 0, j = geometry.faces.length; i < j; i++) {
+                geometry.faces[i].color.setHex(Math.random() * 0xffffff);
+            }
+            var material = new THREE.MeshPhongMaterial({
+                vertexColors: THREE.FaceColors,
+                shininess: 100,
+                envMap: cubeMap
+            });
+
+        }
+        //
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        function render() {
+            var time = performance.now() * 0.001;
+
+            water.material.uniforms.time.value += 1.0 / 60.0;
+            controls.update();
+            water.render();
+            renderer.render(scene, camera);
+        }
+    </script>
+    <script>
+        $(window).resize(function() {
+            init();
+            animate();
+        });
+    </script>
+</body>
+
+</html>

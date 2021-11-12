@@ -1,0 +1,116 @@
+<!--
+
+https://newsapi.org/v2/everything?
+q=%22trump%22
+&
+excludeDomains=insider.com,ctvnews.ca,ajc.com,miamiherald.com,sltrib.com,theglobeandmail.com,aol.com,thehill.com,globalnews.ca,thetakeout.com,kinja.com,bbc.com,businessinsider.com,bbc.co.uk,lifehacker.com,theverge.com,mashable.com,wired.com,cnn.com,gizmodo.com,nytimes.com,techcrunch.com,facebook.com,twitter.com
+&
+pageSize=100
+&
+apiKey=849f187b695d4b2ca400a848c8861b41
+
+-->
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+
+
+    <link rel="stylesheet" href="./news1.css"/>
+
+
+    <script>
+    //help
+    //
+    // in Query
+    // Surround phrases with quotes (") for exact match.
+    // Prepend words or phrases that must appear with a + symbol. Eg: +bitcoin
+    // Prepend words that must not appear with a - symbol. Eg: -bitcoin
+    // Alternatively you can use the AND / OR / NOT keywords, and optionally group these with parenthesis. Eg: crypto AND (ethereum OR litecoin) NOT bitcoin.
+    //    The complete value for query [?q=] must be URL-encoded.
+
+//         source": {
+//            "id": null,
+//            "name": "Futurism.com"
+//        },
+//        "author": "Victor Tangermann",
+//        "title": "Icy Moon Study: There's Way More Water on the Moon Than We Thought Victor Tangermann - Futurism",
+//        "description": "Shadowed lunar craters could harbor millions of tons of ice.",
+//        "url": "https://futurism.com/study-more-water-moon",
+//        "urlToImage": "https://wp-assets.futurism.com/2019/07/study-more-water-on-moon-600x315.jpg",
+//        "publishedAt": "2019-07-23T18:40:25Z",
+//        "content":
+    //
+</script>
+
+</head>
+<body>
+<input type="search" id='shim' placeholder="#search"/>
+<input type='submit' value="?" id='searchButton'/><hr />
+<div id="searchTerm"></div><hr />
+<div class="wrapper" id="testBox"></div>
+
+<script>
+    var query = "trump";
+    clickSearch(query);
+
+    $('#searchButton').click(function(){
+        if (shim.value === ''){
+         //   $('#searchButton2').fadeIn();
+         //   $(searchButton).fadeOut();
+         //   $(shim).fadeOut();
+        }else{
+           // $(showButton).hide();
+         //   $(hideButton).hide();
+         //   $(searches).html('');
+
+            query = shim.value;
+            //console.log(shim.value);
+
+            clickSearch(query);
+        }
+    });
+    $("#shim").keyup(function(event){ if(event.keyCode === 13){ $("#searchButton").click(); } });
+    function clickSearch() {
+        $('#testBox').html('');
+    var excludeDomains = "theatlantic.com,yahoo.com,time.com,engadget.com,buzzfeed.com,insider.com,ctvnews.ca,ajc.com,miamiherald.com,sltrib.com,theglobeandmail.com,aol.com,thehill.com,globalnews.ca,thetakeout.com,kinja.com,bbc.com,businessinsider.com,bbc.co.uk,lifehacker.com,theverge.com,mashable.com,wired.com,cnn.com,gizmodo.com,nytimes.com,techcrunch.com,facebook.com,twitter.com";
+    var pageSize = "100";
+    var apiKey = '849f187b695d4b2ca400a848c8861b41'
+    var suggest = "https://newsapi.org/v2/everything?q="+query+"&excludeDomains="+excludeDomains+"&pageSize="+pageSize+"&apiKey="+apiKey;
+
+    var article = [];
+    var showtags      = document.getElementById('testBox');
+
+
+
+    //  var source, author, title, description, url, urlToImage, publishedAt, content;
+
+    $.getJSON(suggest, function (data) {
+        //article.push('<ul>');
+        $.each(data.articles, function (key, val) {
+            //    articles.push(key, val);
+            var articleTitle = val.title;
+            var articleURL = val.url;
+            var articleImage = val.urlToImage;
+            var articleTime = val.publishedAt;
+            var articleContent = val.content;
+            if (val.urlToImage !== null){
+                $(showtags).append('<div class="media"><span class="spantitle">'+val.title+'<a href="' + val.url + '">  link. </a></span><div class="layer"><p>'+val.content+'</p></div><img src="'+val.urlToImage+'" alt="'+val.publishedAt+'" /></div>');
+                article.push('<li><a href="#" onclick="getSave(' + val.url + ',' + key + ')"><img width="125px" height="125px" src="' + val.urlToImage + '" />' + val.title + '</a></li>');
+
+            }
+
+
+        });
+        //article.push('</ul>');
+        var query1 = query.toString();
+        console.log(query1); $('#searchTerm').html('<h1>Search Term: '+query1+'</h1>')
+    });
+    //$(showtags).html(article);
+
+}
+    //console.log(pickShow);
+
+</script>
+
+</body>
+</html>

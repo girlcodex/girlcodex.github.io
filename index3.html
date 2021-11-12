@@ -1,0 +1,302 @@
+<html>
+
+<head>
+    <!-- load local CSS -->
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700);
+        @import url('https://fonts.googleapis.com/css?family=Overpass');
+        body {
+            overflow: hidden;
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            font-family: "Playfair Display", georgia, serif;
+        }
+        
+        .card {
+            color: rgba(255, 255, 255, 1);
+            background-color: rgba(0, 0, 100, 0.5);
+            pointer-events: none;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            padding: 30px;
+            border-radius: 25px;
+            border: #000;
+            border-width: 5px;
+            width: 400px;
+            height: 200px;
+            margin: auto;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .card:after {
+            content: " ";
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            border-radius: 50%;
+            left: 0;
+            bottom: -50px;
+            box-shadow: 0 30px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card .card-content {
+            margin: auto;
+            text-align: center;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        
+        .card h1 {
+            -webkit-transform: translateZ(100px);
+            transform: translateZ(100px);
+        }
+        
+        .card h2 {
+            -webkit-transform: translateZ(75px);
+            transform: translateZ(75px);
+        }
+        
+        .card p {
+            -webkit-transform: translateZ(50px);
+            transform: translateZ(50px);
+            display: block;
+        }
+        
+        .card p.related {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            font-style: italic;
+        }
+        
+        .card a {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            color: #69c6b8;
+            pointer-events: auto;
+            padding: 10px 15px;
+            background: #4479BA;
+            color: #FFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #20538D;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -webkit-transition-duration: 0.2s;
+            -moz-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .card a:hover {
+            background: #356094;
+            border: solid 1px #2A4E77;
+            text-decoration: none;
+        }
+        
+        .card a:active {
+            -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            background: #2E5481;
+            border: solid 1px #203E5F;
+        }
+        
+        .card a {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            color: #69c6b8;
+            pointer-events: auto;
+            padding: 10px 15px;
+            background: #4479BA;
+            color: #FFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #20538D;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -webkit-transition-duration: 0.2s;
+            -moz-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            z-index: 9999999999999999999999999999999999999999;
+        }
+        
+        .card a:hover {
+            background: #356094;
+            border: solid 1px #2A4E77;
+            text-decoration: none;
+        }
+        
+        .card a:active {
+            -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            background: #2E5481;
+            border: solid 1px #203E5F;
+        }
+        
+        .blur {
+            padding-bottom: 10px;
+            text-shadow: -1px -1px 1px #000, 1px 1px 1px #ccc;
+            color: rgba(0, 0, 100, 0.5);
+            font-size: 5em;
+            text-align: center;
+        }
+        
+        .container {
+            align: center;
+            text-align: center;
+            background-color: rgba(255, 255, 255, .7);
+            -webkit-transform: translateZ(30);
+            transform: translateZ(30);
+            border-radius: 25px 25px 25px 25px;
+            padding-right: 10px;
+            padding-left: 10px;
+            padding-bottom: 20px;
+            height: 100px;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+        }
+        
+        .footerg {
+            position: absolute;
+            right: 0;
+            top: 0;
+            left: 0;
+            padding: 1px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .footerg a {
+            -webkit-transform: translateZ(80px);
+            transform: translateZ(80px);
+            color: rgba(255, 255, 255, 1);
+            pointer-events: auto;
+            padding: 0px 15px;
+            background: #4479BA;
+            color: #FFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #20538D;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            -webkit-transition-duration: 0.2s;
+            -moz-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .footerg a:hover {
+            background: #356094;
+            border: solid 1px #2A4E77;
+            text-decoration: none;
+        }
+        
+        .footerg a:active {
+            -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+            background: #2E5481;
+            border: solid 1px #203E5F;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="footerg"><strong><a href="http://rpwalsh.tk/ab/">3D</a> | <a href="http://rpwalsh.tk/mm/">VR</a> | <a href="http://rpwalsh.tk/ph/">2D</a>  | <a href="http://rpwalsh.tk/port">Design</a> | <a href="https://play.google.com/store/apps/developer?id=Castlehale+Group+Ltd" target="_blank">App</a></strong></div>
+
+    <!--rpwalsh.tk entry portal banner-->
+    <div class="container">
+        <div class="blur">rpwalsh.tk</div>
+    </div>
+
+    <!--rpwalsh.tk entry portal CardUI DOM -->
+    <div class="card">
+        <div class=" card-content">
+            <h1>Ryan P. Walsh</h1>
+            <h2>UI / UX Architect</h2>
+            <p><small>Commercial Code & Design Folio</small>
+            </p>
+            <p class="related">| <a href="./ab/">3D</a> | <a href="./mm/">VR</a> | <a href="./ph/">2D</a> | <a href="https://play.google.com/store/apps/developer?id=Castlehale+Group+Ltd" target="_blank">App</a> | <a href="./port">Design</a> |</p>
+        </div>
+    </div>
+    <!--that's all folks! Do not add anything DOM related below this line -->
+
+    <!--load external scripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paver/1.3.3/js/jquery.paver.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+
+    <!-- Run local JS -->
+    <script>
+        // set mouse control
+        var card = $(".card");
+        var container = $(".container");
+        $(document).on("mousemove", function(e) {
+            var ax = -($(window).innerWidth() / 2 - e.pageX) / 20;
+            var ay = ($(window).innerHeight() / 2 - e.pageY) / 10;
+            card.attr("style", "transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-webkit-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-moz-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg)");
+            container.attr("style", "transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-webkit-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-moz-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg)");
+        });
+        // set touch control 
+        window.addEventListener("touchstart", touchHandler, false);
+
+        function touchHandler(e) {
+            var ax = -($(window).innerWidth() / 2 - e.pageX) / 20;
+            var ay = ($(window).innerHeight() / 2 - e.pageY) / 10;
+            card.attr("style", "transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-webkit-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-moz-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg)");
+            container.attr("style", "transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-webkit-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-moz-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg)");
+        };
+
+        // check if chrome, show debug controls for IE/Firefox   [ should be check for webkit, not chrome -- to fix  --r ]
+    </script>
+
+</body>
+<!--google scripts-->
+
+</html>

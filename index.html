@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html lang="en">
+
+<head>
+    <meta property='og:title' content='MetaMedia.Me'/>
+    <meta property='og:image' content='./metamedia_screencap.jpg'/>
+    <meta property='og:description' content='An Interactive meta-theater portfolio'/>
+    <meta property='og:url' content='https://metamedia.me'/>
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!--                                                                           jquery scripts -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!--                                                                           webgl scripts -->
+    <script src="three.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src="Mirror.js"></script>
+    <script src="WaterShader.js"></script>
+    <script src="./js/fresco.js" type="text/javascript"></script>
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!--                                                                             stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Philosopher">
+    <link rel="stylesheet" href="./metamedia.css"/>
+    <link rel="stylesheet" href="./ab/css/styles.css">
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!--                                                                        html5 extensions -->
+    <script src="./js/jquery.tagcanvas.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!--                                                               local temp script helpers -->
+    <script>var sunbox = "./3.png";</script>
+    <script>
+        $('#bigcanvasContainer').hide();
+
+        var toggleVisibility = function(element) {
+            if (element.id == 'ryan1'){
+                var tempvar1 = document.getElementById('jack1');
+                tempvar1.style.display='none';
+            }
+            if (element.id == 'jack1'){
+                var tempvar1 = document.getElementById('ryan1');
+                tempvar1.style.display='none';
+            }
+            if(element.style.display=='block'){
+                element.style.display='none';
+            } else {
+                element.style.display='block';
+            }
+        };
+        function menuHelper() {
+
+            toggleFullScreen(document.body);
+            $('#fsIcon').toggleClass('fa-expand-arrows-alt fa-compress-arrows-alt');
+        }
+        function toggleFullScreen(elem) {
+            // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+            if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+                if (elem.requestFullScreen) {
+                    elem.requestFullScreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullScreen) {
+                    elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.cancelFullScreen) {
+                    document.cancelFullScreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }</script>
+</head>
+<body>
+<div id="hiddenimage" style="display:none;"><img src="./metamedia_screencap.jpg" /></div>
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                                                        Background interstitial Z curtain-->
+<div id="curtain1" class="curtain"></div>
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                                                                            Main Curtain -->
+<div id="curtain2" class="curtain2">
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!--                                                                         Load Screen Text-->
+    <div class="loading">Loading...</div>
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!--                                                                  SpinKit Loading Circle -->
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+    <!--                                                              End SpinKit Loading Circle -->
+    <!-- --------------------------------------------------------------------------------------- -->
+</div>
+<!--                                                                        End Main Curtain -->
+<!-- --------------------------------------------------------------------------------------- -->
+
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                   Scene 1 ......  Entertainment ...... AJAX Visualizer                   -->
+<!-- --------------------------------------------------------------------------------------- -->
+
+<div id="bigcanvasContainer">
+    <button id='topButton' value="r" onClick="Aclicker()"></button>
+    <button id="hideButton" value="y" onClick="shifty()">X</button>
+    <input type="button" id='mainButton' value=""/>
+    <span id='resetButton' value="p" onClick="Bclicker()" style="visibility:hidden;"></span>
+    <canvas id="bigCanvas""></canvas>
+    <div id="showtags"></div>
+    <div id="chariCard" class="card-container"></div>
+    <div id="shimBtm"></div>
+    <input type="search" id='shim' placeholder="#search"/>
+    <input type='submit' value="?" id='searchButton'/>
+    <input type='submit' value="?" id='searchButton2'/>
+    <div id="searches"></div>
+</div>
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- End Scene 1 -->
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                   Scene 0 ......  Navi Menu  ...... 3D VR WebSpace                          -->
+<!-- --------------------------------------------------------------------------------------- -->
+<nav class="menu" style="display:none;">
+    <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>
+    <label class="menu-open-button" for="menu-open">
+        <span class="hamburger hamburger-1"></span>
+        <span class="hamburger hamburger-2"></span>
+        <span class="hamburger hamburger-3"></span>
+    </label>
+    <a href="https://MetaMedia.Me"  class="menu-item"><i class="fa fa-home"></i></a>
+    <a href="#"  class="menu-item" onclick="menuHelper()"><i class="fa fa-expand-arrows-alt"></i></a>
+    <a href="#" class="menu-item"> <i class="fa fa-heart"></i> </a>
+    <a href="#" class="menu-item"> <i class="fa fa-envelope"></i> </a>
+    <a href="#" class="menu-item"> <i class="fa fa-cog"></i> </a>
+</nav>
+<!-- filters -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        <filter id="shadowed-goo">
+            <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feGaussianBlur in="goo" stdDeviation="3" result="shadow" />
+            <feColorMatrix in="shadow" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2" result="shadow" />
+            <feOffset in="shadow" dx="1" dy="1" result="shadow" />
+            <feBlend in2="shadow" in="goo" result="goo" />
+            <feBlend in2="goo" in="SourceGraphic" result="mix" />
+        </filter>
+        <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feBlend in2="goo" in="SourceGraphic" result="mix" />
+        </filter>
+    </defs>
+</svg>
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                   Scene 0 ......  Asset 1 ...... Business Card                          -->
+<!-- --------------------------------------------------------------------------------------- -->
+<!--rpwalsh.tk entry portal CardUI DOM -->
+<div class="card">
+    <div class="card-content">
+        <h1>UI Architecture 2021</h1>
+        <h2>Interactive Demo</h2>
+        <h3><a href="#" onclick="toggleVisibility(document.getElementById('ryan1'))" id="ryan2">About Ryan</a> <a href="#" onclick="toggleVisibility(document.getElementById('jack1'))" id="jack2">Design Notes</a></h3>
+        <p>(c)2015-2021 All Rights Reserved</p>
+    </div>
+</div>
+
+<div id="jack1" class='jack' style="display:none;">
+    <h1>
+        Design Portfolio 
+    </h1>
+    <img src='https://media.licdn.com/dms/image/C4E03AQFGSsJma2RoKg/profile-displayphoto-shrink_800_800/0?e=1564617600&v=beta&t=7dzBGjaf61SsT0P1AaKqkhqlJisTSXU-VGMO4yWe4mg'>
+    <p class='bio'><hr>
+        <h1>Director of User Experience</h1><hr>
+        Ryan pushes the boundaries of digital perception in a way that creates an immersive meta-theater. 
+<hr>
+    <h1>Key to Production Quality</h1><hr>
+        Symbolic Interactionism, the study of how humans are taught to interface with reality, is the key to Ryan's success in UX Design.
+        If users react in predictable ways to controlled stimuli, then user behavior can be modified by modulating that stimuli in
+        repeatable ways. Ryan creates archetype-based user mythologies which help define how users react to the real (or implied) presence of entropic state-changes.
+<br /><br />
+    <hr>
+    <p style="font-size:9pt;text-align:center;">Fluent in English & Spanish; US Citizen for W-2 Perm or Contract to Hire. Relocation OK, Travel OK. Remote OK. International OK.</p>
+  <hr>
+</p>
+</div>
+<div id="ryan1" class='jack' style="display:none;">
+    <h1>
+        About Ryan
+    </h1>
+    <img src='https://media.licdn.com/dms/image/C5603AQHzuqz6fVThiQ/profile-displayphoto-shrink_200_200/0?e=1564617600&v=beta&t=aAChKfDQD4vfB5VxI2s0NM1XWqCSyR0ytxUGjCxFCQo'>
+    <p class='bio'><br /><hr>
+    <a href="https://www.linkedin.com/in/walshrpw/" style="color">Ryan</a> has 20 solid years of professional experience in software engineering, specializing in 3D User Interface development.
+        His professional life has involved a steadily increasing level of responsibility in both private and
+            public-sector software development. He excels at managing full-stack projects from concept to delivery and
+            enjoys the atmosphere of working in a fast paced multicultural environment. <br />
+<hr>
+    <h1>UI Architect</h1>
+    <hr>
+    IntelliJ Studio * Angular * TypeScript * HTML5 * CSS3 * JavaScript * jQuery * Node * NPM *
+    Adobe CS * Visual Studio 2019 * Ubuntu * AWS * Azure * Docker * Git * Agile Methodologies * <br />
+    <hr>
+    <h1>Experienced Leadership</h1><hr>
+    -- 10 years Executive experience leading development through complex product launch cycles.<br />
+-- 15 years managing large scale corporate UI/UX, IT, Design, and Support Pipelines.<br />
+-- a portfolio of thousands of published commercial works<br />
+    <hr>
+    <p style="font-size:8pt;">US Citizen, prefer W-2 Perm or Contract to Hire. Fluent in English & Spanish; Relocation OK, Travel OK. Remote OK. International OK.</p>
+    <hr>
+    </p>
+</div>
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                   Scene 0 ......  Asset 2 ...... Footer Menu                            -->
+<!-- --------------------------------------------------------------------------------------- -->
+<div id="footer" class="footer">
+    <div class="footer-content">
+        <a id="entButton" href='#' onClick="clicker()"><h2>Entertainment</h2></a>
+        <a href="./ph/index.html" target="_blank"><h2>Small Business</h2></a>
+        <a href="./port/index.html" target="_blank"><h2>Marketing</h2></a>
+        <a href="https://play.google.com/store/apps/developer?id=Castlehale+Group+Ltd" target="_blank"><h2>Mobile</h2></a>
+        <a href="https://github.com/castlehale/castlehale.github.io" target="_blank"><h2>Code</h2></a>
+    </div>
+</div>
+<!--that's all folks! Do not add anything DOM related below this line -->
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                   Scene 0 ......  Helper 1 ...... FX Helper Scripts                   -->
+<!-- --------------------------------------------------------------------------------------- -->
+
+<script>
+    // set mouse control
+    var card = $(".card");
+    $(document).on("mousemove", function(e) {
+        var ax = -($(window).innerWidth() / 2 - e.pageX) / 20;
+        var ay = ($(window).innerHeight() / 2 - e.pageY) / 10;
+        card.attr("style", "transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-webkit-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-moz-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg)");
+    });
+    // set touch control
+    window.addEventListener("touchstart", touchHandler, false);
+
+    function touchHandler(e) {
+        var ax = -($(window).innerWidth() / 2 - e.pageX) / 20;
+        var ay = ($(window).innerHeight() / 2 - e.pageY) / 10;
+        card.attr("style", "transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-webkit-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg);-moz-transform: rotateY(" + ax + "deg) rotateX(" + ay + "deg)");
+    };
+
+    // check if chrome, show debug controls for IE/Firefox   [ should be check for webkit, not chrome -- to fix  --r ]
+</script>
+
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                   Scene 0 ......  Helper 2 ...... WebGL Helper Scripts                   -->
+<!-- --------------------------------------------------------------------------------------- -->
+<script>
+    var container, stats;
+    var camera, scene, renderer;
+    var sphere;
+    var parameters = {
+        width: 2000,
+        height: 2000,
+        widthSegments: 250,
+        heightSegments: 250,
+        depth: 1500,
+        param: 4,
+        filterparam: 1
+    };
+    var waterNormals;
+
+    init();
+    animate();
+
+    function init() {
+        container = document.createElement('div');
+        document.body.appendChild(container);
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.5, 3000000);
+        camera.position.set(2000, 750, 2000);
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        //controls = new THREE.DeviceOrientationControls(camera, renderer.domElement);
+        //controls = new THREE.VRControls(camera, renderer.domElement);
+
+        controls.enablePan = false;
+        controls.minDistance = 1000.0;
+        controls.maxDistance = 5000.0;
+        controls.maxPolarAngle = Math.PI * 0.495;
+        controls.target.set(0, 500, 0);
+        scene.add(new THREE.AmbientLight(0x444444));
+        var light = new THREE.DirectionalLight(0xffffbb, 1);
+        light.position.set(-1, 1, -1);
+        scene.add(light);
+        waterNormals = new THREE.TextureLoader().load('waternormals.jpg');
+        waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
+        water = new THREE.Water(renderer, camera, scene, {
+            textureWidth: 512,
+            textureHeight: 512,
+            waterNormals: waterNormals,
+            alpha: 1.0,
+            sunDirection: light.position.clone().normalize(),
+            sunColor: 0xffff55,
+            waterColor: 0x001e0f,
+            distortionScale: 50.0,
+        });
+        mirrorMesh = new THREE.Mesh(
+            new THREE.PlaneBufferGeometry(parameters.width * 500, parameters.height * 500),
+            water.material
+        );
+        mirrorMesh.add(water);
+        mirrorMesh.rotation.x = -Math.PI * 0.5;
+        scene.add(mirrorMesh);
+        // load skybox
+        var cubeMap = new THREE.CubeTexture([]);
+        cubeMap.format = THREE.RGBFormat;
+        var loader = new THREE.ImageLoader();
+        loader.load(sunbox, function (image) {
+            var getSide = function (x, y) {
+                var size = 1024;
+                var canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                var context = canvas.getContext('2d');
+                context.drawImage(image, -x * size, -y * size);
+
+                function resizeCanvas() {
+                    $(document).width = window.innerWidth;
+                    $(document).height = window.innerHeight;
+                }
+
+                window.addEventListener('resize', resizeCanvas, false);
+                window.addEventListener('resize', onWindowResize, false);
+
+                function onWindowResize() {
+
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                }
+
+                return canvas;
+            };
+            cubeMap.images[0] = getSide(2, 1); // px
+            cubeMap.images[1] = getSide(0, 1); // nx
+            cubeMap.images[2] = getSide(1, 0); // py
+            cubeMap.images[3] = getSide(1, 2); // ny
+            cubeMap.images[4] = getSide(1, 1); // pz
+            cubeMap.images[5] = getSide(3, 1); // nz
+            cubeMap.needsUpdate = true;
+        });
+        var cubeShader = THREE.ShaderLib['cube'];
+        cubeShader.uniforms['tCube'].value = cubeMap;
+        var skyBoxMaterial = new THREE.ShaderMaterial({
+            fragmentShader: cubeShader.fragmentShader,
+            vertexShader: cubeShader.vertexShader,
+            uniforms: cubeShader.uniforms,
+            depthWrite: false,
+            side: THREE.BackSide
+        });
+        var skyBox = new THREE.Mesh(
+            new THREE.BoxGeometry(1000000, 1000000, 1000000),
+            skyBoxMaterial
+        );
+        scene.add(skyBox);
+        var geometry = new THREE.IcosahedronGeometry(400, 4);
+        for (var i = 0, j = geometry.faces.length; i < j; i++) {
+            geometry.faces[i].color.setHex(Math.random() * 0xffffff);
+        }
+        var material = new THREE.MeshPhongMaterial({
+            vertexColors: THREE.FaceColors,
+            shininess: 100,
+            envMap: cubeMap
+        });
+    }
+    //
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+
+    }
+    function render() {
+        var time = performance.now() * 0.001;
+        water.material.uniforms.time.value += 1.0 / 60.0;
+        controls.update();
+        water.render();
+        renderer.render(scene, camera);
+    }
+</script>
+<!-- --------------------------------------------------------------------------------------- -->
+<!--                   Scene 0 ......  Helper 3 ...... Cleanup Scripts                       -->
+<!-- --------------------------------------------------------------------------------------- -->
+<script src="./ab/js/prot4usA.js"></script>
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX END PAGE -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX END PAGE -->
+<!-- --------------------------------------------------------------------------------------- -->
+</body>
+</html>
