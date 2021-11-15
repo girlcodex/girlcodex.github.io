@@ -17,3 +17,7 @@ the initial commit is buggy, but diffing it against more current commits shows h
 its a messy playground at first, but i've done that purposefully, so you can see how i solve problems.
 
 
+edit: 11/15 updated GraphReact-build and GraphReactDemo
+  ^^^ this should be a better demo 
+
+
